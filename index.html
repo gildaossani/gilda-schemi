@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gilda Ossani — Tre schemi che tengono ferme le donne che funzionano</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --ink: #1A1814;
+    --cream: #F5F0E8;
+    --gold: #C8A96E;
+    --gold-light: #DFC898;
+    --gold-dark: #8C7240;
+    --ink-soft: #5A534C;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--ink); }
+
+  .page { width: 100%; background: var(--ink); color: var(--cream); }
+  .page.light { background: var(--cream); color: var(--ink); }
+  .page.gold  { background: linear-gradient(165deg, #8A6535 0%, #9A7A45 50%, #C8A96E 100%); color: var(--ink); }
+
+  .inner {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 56px 28px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .inner.in-view { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .inner { opacity: 1; transform: none; transition: none; } }
+
+  .tag { display: inline-block; align-self: flex-start; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+  .page.light .tag { border-color: var(--gold-dark); color: var(--gold-dark); }
+  .page.gold .tag { border-color: rgba(26,24,20,0.4); color: rgba(26,24,20,0.75); }
+
+  h1.h { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 34px; line-height: 1.18; color: var(--cream); margin-bottom: 16px; }
+  h1.h em { font-style: italic; color: var(--gold-light); font-weight: 500; }
+  .page.light h1.h { color: var(--ink); }
+  .page.light h1.h em { color: var(--gold-dark); }
+  .page.gold h1.h { color: var(--ink); }
+  .page.gold h1.h em { color: #fff; }
+
+  .sub { font-size: 15px; line-height: 1.55; color: rgba(245,240,232,0.6); margin-bottom: 20px; }
+  .page.light .sub { color: var(--ink-soft); }
+
+  .p { font-size: 15.5px; line-height: 1.68; color: rgba(245,240,232,0.82); margin-bottom: 16px; }
+  .page.light .p { color: #3A352F; }
+  .p strong { color: var(--cream); }
+  .page.light .p strong { color: var(--ink); }
+
+  .divider { width: 40px; height: 2px; background: var(--gold); margin: 6px 0 20px; }
+  .page.light .divider { background: var(--gold-dark); }
+
+  .index-list { margin-top: 12px; }
+  .index-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,24,20,0.12); }
+  .index-num { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gold-dark); color: var(--gold-dark); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .index-text { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--ink); }
+  .index-desc { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; }
+
+  .compare { display: flex; gap: 12px; margin-bottom: 20px; }
+  .compare-col { flex: 1; border: 1px solid rgba(200,169,110,0.35); border-radius: 6px; padding: 14px; }
+  .compare-col.solid { background: rgba(200,169,110,0.12); }
+  .page.light .compare-col { border-color: rgba(140,114,64,0.35); }
+  .page.light .compare-col.solid { background: rgba(140,114,64,0.08); }
+  .compare-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .page.light .compare-label { color: var(--gold-dark); }
+  .compare-text { font-size: 13.5px; line-height: 1.5; }
+
+  .feed-box { border-left: 2px solid var(--gold); background: rgba(200,169,110,0.08); padding: 14px 18px; margin-bottom: 20px; }
+  .page.light .feed-box { border-color: var(--gold-dark); background: rgba(140,114,64,0.06); }
+  .feed-label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+  .page.light .feed-label { color: var(--gold-dark); }
+  .feed-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.5; }
+
+  .cycle-label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .page.light .cycle-label { color: var(--gold-dark); }
+  .cycle { margin-bottom: 20px; }
+  .cycle-step { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; }
+  .cycle-arrow { color: var(--gold); font-size: 15px; flex-shrink: 0; width: 18px; }
+  .page.light .cycle-arrow { color: var(--gold-dark); }
+  .cycle-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .cycle-desc { font-size: 12.5px; line-height: 1.45; opacity: 0.68; }
+
+  .callout { background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.4); border-radius: 6px; padding: 16px 18px; font-size: 14px; font-weight: 600; line-height: 1.55; color: var(--gold-light); margin-top: 8px; }
+  .page.light .callout { background: rgba(140,114,64,0.08); border-color: rgba(140,114,64,0.3); color: var(--gold-dark); }
+
+  .foot { margin-top: 20px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: rgba(200,169,110,0.7); }
+
+  .neg-list { margin: 16px 0 20px; }
+  .neg-item { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500; padding: 11px 0; border-bottom: 1px solid rgba(26,24,20,0.15); }
+  .neg-mark { color: rgba(26,24,20,0.7); font-size: 15px; }
+
+  .cta-box { margin-top: 12px; background: rgba(26,24,20,0.9); border-radius: 8px; padding: 24px; color: var(--cream); }
+  .cta-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--cream); margin-bottom: 10px; }
+  .cta-text { font-size: 14px; line-height: 1.55; color: rgba(245,240,232,0.82); margin-bottom: 18px; }
+  .cta-btn { display: inline-block; background: var(--gold); color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 13px 26px; border-radius: 30px; text-decoration: none; }
+  .cta-price { font-size: 12px; color: rgba(245,240,232,0.55); margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="inner">
+    <div class="tag">Gilda Ossani — Autosabotaggio</div>
+    <h1 class="h">Perché resti ferma<br>anche quando <em>vuoi</em><br>muoverti?</h1>
+    <p class="sub">Scopri i 3 schemi invisibili che tengono ferme le donne che funzionano.</p>
+    <div class="divider"></div>
+    <p class="p">Pensi che il problema sia la mancanza di tempo? O di energie? Ma se il vero ostacolo fosse un altro?</p>
+    <p class="p"><strong>Il tempo non sempre basta.</strong> A volte il tempo c'è e la cosa che conta resta comunque indietro. Perché quello che ti tiene ferma non è quanto tempo hai. È quello che fai ogni giorno senza accorgertene.</p>
+    <p class="p">Molte donne che funzionano restano ferme non perché manchino di capacità, ma perché ripetono, senza saperlo, piccoli gesti che le tengono al sicuro invece che in movimento.</p>
+    <p class="p">Non servono test lunghi né analisi complicate per iniziare a vederli. Bastano tre schemi e un po' di onestà.</p>
+    <div class="foot">— Gilda</div>
+  </div>
+</div>
+
+<div class="page light">
+  <div class="inner">
+    <div class="tag">Indice</div>
+    <h1 class="h">I tre schemi<br>da <em>riconoscere</em></h1>
+    <div class="divider"></div>
+    <p class="p">Sono tre modi diversi di fare la stessa cosa: rimandare l'esposizione. Non servono tutti e tre per riconoscersi, ne basta uno.</p>
+    <div class="index-list">
+      <div class="index-item"><div class="index-num">1</div><div><div class="index-text">Sempre reperibile</div><div class="index-desc">Occuparsi degli altri per non occuparsi di sé</div></div></div>
+      <div class="index-item"><div class="index-num">2</div><div><div class="index-text">Quasi pronta</div><div class="index-desc">Rimandare l'uscita per non essere giudicata</div></div></div>
+      <div class="index-item"><div class="index-num">3</div><div><div class="index-text">Prima le altre cose</div><div class="index-desc">Restare occupata per non affrontare ciò che conta</div></div></div>
+    </div>
+    <p class="p" style="margin-top:16px;">Leggili in ordine o vai dritta a quello che ti sembra già familiare.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="inner">
+    <div class="tag">Schema #1</div>
+    <h1 class="h">Sempre <em>reperibile</em></h1>
+    <p class="p">Rispondi subito, a qualsiasi ora. Sei il punto fermo a cui si chiede quando serve una soluzione veloce, la persona su cui si può sempre contare.</p>
+    <p class="p">Dire di sì costa meno di dire di no, così hai smesso di provarci. Il tempo che ti resta è quello che avanza dopo aver sistemato tutto il resto e di solito non avanza niente.</p>
+    <div class="compare">
+      <div class="compare-col"><div class="compare-label">Cosa credi di fare</div><div class="compare-text">Essere disponibile, gentile, affidabile. Una qualità, non un problema.</div></div>
+      <div class="compare-col solid"><div class="compare-label">Cosa fai davvero</div><div class="compare-text">Eviti di scoprire cosa succederebbe se, per una volta, dicessi di no.</div></div>
+    </div>
+    <div class="feed-box"><div class="feed-label">Cosa lo alimenta</div><div class="feed-text">"Se sono utile, sono al sicuro." Finché servi a qualcuno, nessuno mette in discussione il tuo posto.</div></div>
+    <div class="cycle-label"><span>↻</span> Il ciclo</div>
+    <div class="cycle">
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Rispondi subito</div><div class="cycle-desc">Ti senti utile, in controllo della situazione.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Il tuo tempo si esaurisce</div><div class="cycle-desc">Quello che dovevi fare tu resta indietro, di nuovo.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Non c'è più spazio per te</div><div class="cycle-desc">La tua lista slitta a domani, un'altra volta.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">↻</span><div><div class="cycle-title">Il ciclo si richiude</div><div class="cycle-desc">Arriva la prossima richiesta e riparte tutto da capo.</div></div></div>
+    </div>
+    <div class="callout">Ogni volta che rispondi prima di pensarci, non stai aiutando te stessa. Stai rimandando te stessa.</div>
+  </div>
+</div>
+
+<div class="page light">
+  <div class="inner">
+    <div class="tag">Schema #2</div>
+    <h1 class="h">Quasi <em>pronta</em></h1>
+    <p class="p">C'è sempre un ultimo dettaglio da sistemare prima di mostrare qualcosa. Non manca il coraggio. Manca la certezza che sia già abbastanza.</p>
+    <p class="p">Così rivedi, aggiusti, rimandi ancora un giorno e quello che avevi da dire resta chiuso in una cartella che chiami bozza.</p>
+    <div class="compare">
+      <div class="compare-col"><div class="compare-label">Cosa credi di fare</div><div class="compare-text">Migliorare il lavoro. Renderlo più curato, più giusto, più tuo.</div></div>
+      <div class="compare-col solid"><div class="compare-label">Cosa fai davvero</div><div class="compare-text">Rimandi il momento in cui qualcun altro potrà dire la sua.</div></div>
+    </div>
+    <div class="feed-box"><div class="feed-label">Cosa lo alimenta</div><div class="feed-text">"Se non è ancora finito, nessuno può dire che non va bene." Finché lavori ancora, nessuno giudica.</div></div>
+    <div class="cycle-label"><span>↻</span> Il ciclo</div>
+    <div class="cycle">
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Rivedi ancora</div><div class="cycle-desc">Un dettaglio, poi un altro, poi un altro ancora.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Non è mai il momento</div><div class="cycle-desc">La versione attuale non ti sembra mai pronta davvero.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Resta nel cassetto</div><div class="cycle-desc">Quello che avevi da dire non esce, un'altra volta.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">↻</span><div><div class="cycle-title">Il ciclo si richiude</div><div class="cycle-desc">Arriva un'idea nuova e la revisione ricomincia lì.</div></div></div>
+    </div>
+    <div class="callout">Non stai cercando la versione migliore. Stai evitando il momento in cui qualcuno potrebbe giudicare quella attuale.</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="inner">
+    <div class="tag">Schema #3</div>
+    <h1 class="h">Prima le <em>altre cose</em></h1>
+    <p class="p">La lista è piena e la cosa che conta davvero resta sempre l'ultima voce. Non perché sia meno urgente delle altre.</p>
+    <p class="p">Perché affrontarla ti espone e finché resti occupata con il resto, quella cosa può aspettare ancora un giorno.</p>
+    <div class="compare">
+      <div class="compare-col"><div class="compare-label">Cosa credi di fare</div><div class="compare-text">Gestire le priorità. Occuparti prima di ciò che è più urgente.</div></div>
+      <div class="compare-col solid"><div class="compare-label">Cosa fai davvero</div><div class="compare-text">Rimani al sicuro un altro po', lontana da ciò che ti espone davvero.</div></div>
+    </div>
+    <div class="feed-box"><div class="feed-label">Cosa lo alimenta</div><div class="feed-text">"Finché sono occupata, nessuno può dire che non ci provo." L'urgenza copre l'assenza.</div></div>
+    <div class="cycle-label"><span>↻</span> Il ciclo</div>
+    <div class="cycle">
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Trovi altro da fare</div><div class="cycle-desc">Qualcosa di urgente si presenta sempre, appena in tempo.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">La giornata si esaurisce</div><div class="cycle-desc">La cosa che conta resta di nuovo per domani.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">→</span><div><div class="cycle-title">Ti senti comunque occupata</div><div class="cycle-desc">La sensazione di aver fatto molto copre il vuoto.</div></div></div>
+      <div class="cycle-step"><span class="cycle-arrow">↻</span><div><div class="cycle-title">Il ciclo si richiude</div><div class="cycle-desc">Domani la lista cambia forma, la voce in fondo resta la stessa.</div></div></div>
+    </div>
+    <div class="callout">Chiami priorità quello che, in realtà, è un modo elegante per restare al sicuro un altro po'.</div>
+  </div>
+</div>
+
+<div class="page gold">
+  <div class="inner">
+    <div class="tag">E adesso</div>
+    <h1 class="h">Non hai bisogno<br>di più <em>disciplina</em></h1>
+    <div class="divider" style="background:rgba(26,24,20,0.4);"></div>
+    <div class="neg-list">
+      <div class="neg-item"><span class="neg-mark">—</span><span>Non hai bisogno di un metodo nuovo ogni mese</span></div>
+      <div class="neg-item"><span class="neg-mark">—</span><span>Non hai bisogno di alzarti un'ora prima</span></div>
+      <div class="neg-item"><span class="neg-mark">—</span><span>Non hai bisogno di sentirti in colpa ogni volta che rimandi</span></div>
+      <div class="neg-item"><span class="neg-mark">—</span><span>Non hai bisogno di aspettare il momento perfetto</span></div>
+      <div class="neg-item"><span class="neg-mark">—</span><span>Non hai bisogno di provare più a lungo</span></div>
+    </div>
+    <p class="p" style="color:rgba(26,24,20,0.85);">Hai bisogno di riconoscere lo schema esatto che usi tu, quello specifico, non uno qualsiasi tra i tre. E di vedere come si richiude il ciclo, prima ancora che riparta.</p>
+    <div class="cta-box">
+      <div class="cta-eyebrow">Il percorso</div>
+      <div class="cta-title">Il Meccanismo</div>
+      <p class="cta-text">Si parte da "Quello che fai invece", il test che nomina lo schema esatto che ti riguarda tra i cinque più comuni. Poi il percorso guidato ti porta dentro l'episodio vero, quello di cui hai ancora i dettagli in testa: sei tu, in prima persona, a cominciare a sistemarlo.</p>
+      <a class="cta-btn" href="https://ko-fi.com/s/bd0aecbdaa" target="_blank" rel="noopener">Scopri Il Meccanismo</a>
+      <div class="cta-price">€17 — Ko-fi</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var targets = document.querySelectorAll('.inner');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in-view'); } });
+    }, { threshold: 0.15 });
+    targets.forEach(function(t) { obs.observe(t); });
+  } else {
+    targets.forEach(function(t) { t.classList.add('in-view'); });
+  }
+</script>
+
+</body>
+</html>
